@@ -6,16 +6,21 @@ const Quotes = () => {
         text: '',
         author: ''
     })
-useEffect(()=>{
-    onclick = async () => {
+
+    const onButtonClick = async () => {
         const response = await axios.get(`https://type.fit/api/quotes`);
-        setQuotes(response.data[Math.floor(Math.random())*response.data.length])
+        setQuotes(response.data[Math.floor(Math.random()* response.data.length)])
     }
-}, [])
+
+useEffect(()=>{
+      onButtonClick();
+    }, [],
+);
+
 
     return (
         <div className='box'>
-            <div className='submit'><input type='submit' value='New Quote' className='submit' onClick={onclick}/></div>
+            <div className='submit'><input type='submit' value='New Quote' className='submit' onClick={onButtonClick}/></div>
             <p className='words'> {quotes.text}</p>
             <p className='author'>-{quotes.author} </p>
         </div>
